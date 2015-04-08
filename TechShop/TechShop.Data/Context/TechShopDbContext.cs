@@ -12,6 +12,8 @@
         {
         }
 
+        public IDbSet<UserSession> UserSessions { get; set; } 
+
         public static TechShopDbContext Create()
         {
             return new TechShopDbContext();

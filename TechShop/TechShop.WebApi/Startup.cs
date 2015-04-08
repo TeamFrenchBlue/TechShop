@@ -14,6 +14,7 @@ namespace TechShop.WebApi
 
     using Data.Context;
     using Data.Data;
+    using UserSessionManager;
 
     public partial class Startup
     {
@@ -38,6 +39,7 @@ namespace TechShop.WebApi
         {
             kernel.Bind<ITechShopData>().To<TechShopData>();
             kernel.Bind<ITechShopDbContext>().To<TechShopDbContext>();
+            kernel.Bind<IUserSessionManager>().To<UserSessionManager.UserSessionManager>();
         }
     }
 }

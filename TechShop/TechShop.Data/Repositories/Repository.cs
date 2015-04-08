@@ -60,6 +60,14 @@
             this.ChangeState(entity, EntityState.Deleted);
         }
 
+        public void DeleteRange(IQueryable<T> entities)
+        {
+            foreach (T entity in entities)
+            {
+                this.Delete(entity);
+            }
+        }
+
         public void Detach(T entity)
         {
             var entry = this.Context.Entry(entity);

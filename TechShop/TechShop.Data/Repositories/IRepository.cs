@@ -21,6 +21,8 @@
 
         void Delete(T entity);
 
+        void DeleteRange(IQueryable<T> entities);
+
         void Detach(T entity);
 
         void SaveChanges();

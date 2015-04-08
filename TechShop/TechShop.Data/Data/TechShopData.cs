@@ -28,7 +28,12 @@
             get { return this.GetRepository<User>(); }
         }
 
-        public int SaveChanges()
+        public IRepository<UserSession> UserSessions
+        {
+            get { return this.GetRepository<UserSession>(); }
+        }
+
+    public int SaveChanges()
         {
             return this.context.SaveChanges();
         }

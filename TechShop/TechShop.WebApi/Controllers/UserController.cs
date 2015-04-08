@@ -2,17 +2,20 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Net;
     using System.Net.Http;
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
     using System.Web;
     using System.Web.Http;
+    using System.Web.Script.Serialization;
 
     using Data.Context;
     using Data.Data;
     using Models.Users;
     using TechShop.Models;
+    using UserSessionManager;
 
     using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -20,11 +23,13 @@
     public class UserController : BaseController
     {
         private ApplicationUserManager userManager;
+        private IUserSessionManager userSessionManager;
 
-        public UserController(ITechShopData data) : base(data)
+        public UserController(ITechShopData data, IUserSessionManager userSessionManager) : base(data)
         {
             this.userManager = new ApplicationUserManager(
                 new UserStore<User>(new TechShopDbContext()));
+            this.userSessionManager = userSessionManager;
         }
 
         public ApplicationUserManager UserManager
@@ -95,6 +100,18 @@
                 var tokenServiceResponse = await client.PostAsync(tokenServiceUrl, requestParamsFormUrlEncoded);
                 var responseString = await tokenServiceResponse.Content.ReadAsStringAsync();
                 var responseCode = tokenServiceResponse.StatusCode;
+
+                if (responseCode == HttpStatusCode.OK)
+                {
+                    var jsSerializer = new JavaScriptSerializer();
+                    var responseData =
+                        jsSerializer.Deserialize<Dictionary<string, string>>(responseString);
+                    var accessToken = responseData["access_token"];
+                    var username = responseData["userName"];
+                    this.userSessionManager.CreateOrExtendUserSession(username, accessToken);
+
+                    this.userSessionManager.RemoveExpiredSessions();
+                }
 
                 var responseMessage = new HttpResponseMessage(responseCode)
                 {

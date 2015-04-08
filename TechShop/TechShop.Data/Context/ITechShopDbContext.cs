@@ -9,6 +9,8 @@
     {
         IDbSet<User> Users { set; }
 
+        IDbSet<UserSession> UserSessions { get; } 
+
         int SaveChanges();
 
         DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;

@@ -7,6 +7,8 @@
     {
         IRepository<User> Users { get; }
 
+        IRepository<UserSession> UserSessions { get; }
+ 
         int SaveChanges();
     }
 }
