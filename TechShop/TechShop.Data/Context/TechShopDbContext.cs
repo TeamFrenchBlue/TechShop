@@ -2,7 +2,7 @@
 {
     using System.Data.Entity;
     using Microsoft.AspNet.Identity.EntityFramework;
-
+    using Migrations;
     using Models;
 
     public class TechShopDbContext : IdentityDbContext<User>, ITechShopDbContext
@@ -10,6 +10,8 @@
         public TechShopDbContext()
             : base("TechShopConnection", throwIfV1Schema: false)
         {
+            Database.SetInitializer(
+                new MigrateDatabaseToLatestVersion<TechShopDbContext, TechShopMigrationConfiguration>());
         }
 
         public IDbSet<UserSession> UserSessions { get; set; } 

@@ -58,6 +58,7 @@
     <Compile Include="Context\TechShopDbContext.cs" />
     <Compile Include="Data\ITechShopData.cs" />
     <Compile Include="Data\TechShopData.cs" />
+    <Compile Include="Migrations\TechShopMigrationConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
