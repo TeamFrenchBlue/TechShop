@@ -14,7 +14,27 @@
                 new MigrateDatabaseToLatestVersion<TechShopDbContext, TechShopMigrationConfiguration>());
         }
 
-        public IDbSet<UserSession> UserSessions { get; set; } 
+        public IDbSet<UserSession> UserSessions { get; set; }
+
+        public IDbSet<Cart> Carts { get; set; }
+
+        public IDbSet<Category> Categories { get; set; }
+
+        public IDbSet<GlobalPromotion> GlobalPromotions { get; set; }
+
+        public IDbSet<IndividualPromotion> IndividualPromotions { get; set; }
+
+        public IDbSet<Model> Models { get; set; }
+
+        public IDbSet<Order> Orders { get; set; }
+
+        public IDbSet<Product> Products { get; set; }
+
+        public IDbSet<Promotion> Promotions { get; set; }
+
+        public IDbSet<State> States { get; set; }
+
+        public IDbSet<Trade> Trades { get; set; }
 
         public static TechShopDbContext Create()
         {

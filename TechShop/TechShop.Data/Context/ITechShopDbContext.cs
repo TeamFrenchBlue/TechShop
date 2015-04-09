@@ -9,7 +9,27 @@
     {
         IDbSet<User> Users { set; }
 
-        IDbSet<UserSession> UserSessions { get; } 
+        IDbSet<UserSession> UserSessions { get; }
+
+        IDbSet<Cart> Carts { get; }
+
+        IDbSet<Category> Categories { get; }
+
+        IDbSet<GlobalPromotion> GlobalPromotions { get; }
+
+        IDbSet<IndividualPromotion> IndividualPromotions { get; }
+
+        IDbSet<Model> Models { get; }
+
+        IDbSet<Order> Orders { get; }
+
+        IDbSet<Product> Products { get; }
+
+        IDbSet<Promotion> Promotions { get; }
+
+        IDbSet<State> States { get; }
+
+        IDbSet<Trade> Trades { get; }
 
         int SaveChanges();
 
