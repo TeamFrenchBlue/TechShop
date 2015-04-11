@@ -33,7 +33,59 @@
             get { return this.GetRepository<UserSession>(); }
         }
 
-    public int SaveChanges()
+        public IRepository<Cart> Carts
+        {
+            get { return this.GetRepository<Cart>(); }
+        }
+
+        public IRepository<Category> Categories
+        {
+            get { return this.GetRepository<Category>(); } 
+            
+        }
+
+        public IRepository<GlobalPromotion> GlobalPromotions
+        {
+            get { return this.GetRepository<GlobalPromotion>(); }
+        }
+
+        public IRepository<IndividualPromotion> IndividualPromotions
+        {
+            get { return this.GetRepository<IndividualPromotion>(); }
+            
+        }
+
+        public IRepository<Model> Models
+        {
+            get { return this.GetRepository<Model>(); }
+        }
+
+        public IRepository<Order> Orders
+        {
+            get { return this.GetRepository<Order>(); }
+        }
+
+        public IRepository<Product> Products
+        {
+            get { return this.GetRepository<Product>(); }
+        }
+
+        public IRepository<Promotion> Promotions
+        {
+            get { return this.GetRepository<Promotion>(); }
+        }
+
+        public IRepository<State> States
+        {
+            get { return this.GetRepository<State>(); }
+        }
+
+        public IRepository<Trade> Trades
+        {
+            get { return this.GetRepository<Trade>(); }
+        }
+
+        public int SaveChanges()
         {
             return this.context.SaveChanges();
         }

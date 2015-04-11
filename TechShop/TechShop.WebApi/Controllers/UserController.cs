@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Net;
     using System.Net.Http;
     using System.Text;
@@ -120,6 +121,41 @@
 
                 return responseMessage;
             }
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("cart/add")]
+        public IHttpActionResult AddProductToCart(AddProductToCartBindingModel cartItemData)
+        {
+            if (!ModelState.IsValid)
+            {
+                return this.BadRequest();
+            }
+
+            var user = this.Data.Users.All().FirstOrDefault(u => u.UserName == cartItemData.Username);
+            if (user == null)
+            {
+                return this.NotFound();
+            }
+
+            var product = this.Data.Products.All().FirstOrDefault(p => p.Id == cartItemData.ProductId);
+            if (product == null)
+            {
+                return this.NotFound();
+            }
+
+            var newCartItem = new Cart
+            {
+                Product = product,
+                User = user,
+                Price = cartItemData.Price
+            };
+
+            this.Data.Carts.Add(newCartItem);
+            this.Data.SaveChanges();
+
+            return this.Ok("New item added to cart successfully");
         }
     }
 }
