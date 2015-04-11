@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+<head>
+    <title>TechShop</title>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="styles/theme.css" rel="stylesheet" />
+    <link href="styles/app.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div style="background-image: linear-gradient(#54b4eb, #2fa4e7 60%, #1d9ce5); background-repeat: no-repeat;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!--NAVIGATION-->
+                    <nav class="navbar navbar-default app-nav">
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand" href="#/">TechShop</a>
+                            </div>
+
+                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                <ul class="nav navbar-nav">
+                                    <li>
+                                        <a href="#/category/phones">
+                                            Smartphones
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#/category/tablets">Tablets</a>
+                                    </li>
+                                    <li>
+                                        <a href="#/category/laptops">Laptops</a>
+                                    </li>
+                                    <li>
+                                        <a href="#/category/pcs">PCs</a>
+                                    </li>
+                                    <li>
+                                        <a href="#/category/pcs">Cameras</a>
+                                    </li>
+                                    <li>
+                                        <a href="#/category/pcs">Go Pro</a>
+                                    </li>
+                                </ul>
+                                <form class="navbar-form navbar-right" role="search" ng-switch="isLogin">
+                                    <div ng-switch-when="false" class="btn-group">
+                                        <a href="#/register" class="btn btn-success">Register</a>
+                                        <a href="#/login" class="btn btn-warning">Login</a>
+                                    </div>
+                                    <div ng-switch-when="true" class="btn-group">
+                                        <a href="#/" class="btn btn-primary">{{username}}</a>
+                                    </div>
+                                    <!--chart-->
+                                    <div class="btn-group">
+                                        <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                            Shopping chart
+                                            <span class="glyphicon glyphicon-shopping-cart"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="#">First login</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!--options-->
+
+                                    <div class="btn-group" ng-switch-when="true">
+                                        <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">   
+                                            <span class="glyphicon glyphicon-cog"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="#">Some options</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div ng-switch-when="true" class="btn-group">
+                                        <a href="#/logout" class="btn btn-default">Logout</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-view>
+
+    </div>
+
+
+
+    <div style="background-color:black; color:white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <h3>TechShop</h3>
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <a href="#/category/phones">
+                                    Smartphones
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#/category/tablets">Tablets</a>
+                            </li>
+                            <li>
+                                <a href="#/category/laptops">Laptops</a>
+                            </li>
+                            <li>
+                                <a href="#/category/pcs">PCs</a>
+                            </li>
+                            <li>
+                                <a href="#/category/pcs">Cameras</a>
+                            </li>
+                            <li>
+                                <a href="#/category/pcs">Go Pro</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+
+                    </div>
+                    <div class="col-md-4">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+
+    <script src="bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+
+    <script src="app.js"></script>
+
+    <script src="services/baseUrl.js"></script>
+    <script src="services/notyService.js"></script>
+    <script src="services/requester.js"></script>
+    <script src="services/userSession.js"></script>
+    <script src="services/userRequests.js"></script>
+
+    <script src="controllers/HomeController.js"></script>
+    <script src="controllers/LoginController.js"></script>
+    <script src="controllers/RegisterController.js"></script>
+    <script src="controllers/CategoryController.js"></script>
+    <script src="controllers/ItemController.js"></script>
+
+    <script src="directives/Item.js"></script>
+
+</body>
+</html>

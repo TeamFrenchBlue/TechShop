@@ -1,0 +1,26 @@
+{
+  "name": "TechShop",
+  "version": "0.0.0",
+  "homepage": "https://github.com/TeamFrenchBlue/TechShop",
+  "authors": [
+    "Andrey Bozhilov <andrei.bozhilov@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.3.15",
+    "angular-route": "~1.3.15",
+    "jquery": "~2.1.3",
+    "bootstrap": "~3.3.4",
+    "noty": "~2.3.5",
+    "angular-animate": "~1.3.15",
+    "angular-ui-bootstrap-bower": "~0.12.1"
+  }
+}
