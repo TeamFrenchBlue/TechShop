@@ -27,6 +27,7 @@
                 this.AddTrades(context);
                 this.AddModels(context);
                 this.AddProducts(context); 
+                this.AddOrderStates(context);
             }
         }
 
@@ -133,6 +134,22 @@
             };
 
             context.Models.AddOrUpdate(lenovoModel, nokiaModel);
+            context.SaveChanges();
+        }
+
+        public void AddOrderStates(TechShopDbContext context)
+        {
+            var waitingApprovalState = new State
+            {
+                Name = "Waiting approval"
+            };
+
+            var paidState = new State
+            {
+                Name = "Paid"
+            };
+
+            context.States.AddOrUpdate(waitingApprovalState, paidState);
             context.SaveChanges();
         }
     }

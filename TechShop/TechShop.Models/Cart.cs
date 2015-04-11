@@ -13,7 +13,7 @@
         [Column(TypeName = "money")]
         public decimal Price { get; set; }
 
-        public virtual State Sate { get; set; }
+        public virtual State State { get; set; }
 
         public virtual Order Order { get; set; }
     }

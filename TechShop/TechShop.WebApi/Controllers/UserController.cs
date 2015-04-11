@@ -149,13 +149,31 @@
             {
                 Product = product,
                 User = user,
-                Price = cartItemData.Price
+                Price = cartItemData.Price,
+                State = this.Data.States.All().First(s => s.Name == "Waiting approval")
             };
 
             this.Data.Carts.Add(newCartItem);
             this.Data.SaveChanges();
 
             return this.Ok("New item added to cart successfully");
+        }
+
+        [HttpDelete]
+        [Authorize]
+        [Route("cart/remove/{id}")]
+        public IHttpActionResult RemoveFromCart(int id)
+        {
+            var cartItem = this.Data.Carts.All().FirstOrDefault(c => c.Id == id);
+            if (cartItem == null)
+            {
+                return this.NotFound();
+            }
+
+            this.Data.Carts.Delete(cartItem);
+            this.Data.SaveChanges();
+
+            return this.Ok("Cart item removed successfully");
         }
     }
 }
