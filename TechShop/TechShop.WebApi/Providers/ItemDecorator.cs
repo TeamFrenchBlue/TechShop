@@ -11,7 +11,7 @@
 
     public abstract class ItemDecorator<T>
     {
-        public IEnumerable<T> ResultSet { get; private set; }
+        public virtual IEnumerable<T> ResultSet { get; private set; }
 
         public ITechShopData Data { get; private set; }
 
