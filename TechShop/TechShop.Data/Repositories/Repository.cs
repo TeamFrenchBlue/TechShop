@@ -8,7 +8,7 @@
     using Context;
 
     public class Repository<T>
-        : IRepository<T> where T : class 
+        : IRepository<T> where T : class
     {
         public Repository(ITechShopDbContext context)
         {
@@ -58,6 +58,12 @@
         public void Delete(T entity)
         {
             this.ChangeState(entity, EntityState.Deleted);
+        }
+
+        public void Delete(object id)
+        {
+            var entity = this.GetById(id);
+            this.Delete(entity);
         }
 
         public void DeleteRange(IQueryable<T> entities)

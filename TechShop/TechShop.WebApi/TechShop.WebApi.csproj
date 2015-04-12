@@ -230,13 +230,17 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TradesController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\Admin\AdminEditUserBindingModel.cs" />
+    <Compile Include="Models\CategoryBindingModel.cs" />
+    <Compile Include="Models\TradeBindingModel.cs" />
     <Compile Include="Models\Users\AddProductToCartBindingModel.cs" />
     <Compile Include="Models\Users\LoginBindingModel.cs" />
     <Compile Include="Models\Users\RegisterBindingModel.cs" />

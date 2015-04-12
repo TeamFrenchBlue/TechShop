@@ -10,6 +10,10 @@
         [Required]
         public string Name { get; set; }
 
+        public int Position { get; set; }
+
+        public int CategoryId { get; set; }
+
         public virtual Category Category { get; set; }
     }
 }

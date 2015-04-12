@@ -5,6 +5,7 @@
     using Data.Data;
 
     using Microsoft.AspNet.Identity;
+    using System.Net.Http;
 
     public class BaseController : ApiController
     {
@@ -42,6 +43,36 @@
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Checks object for null reference
+        /// </summary>
+        /// <param name="obj">Object to check</param>
+        /// <param name="objName">Name of the object, goes in exception message</param>
+        /// <param name="objId">Id of the object, goes in exception message</param>
+        /// <exception cref="HttpResponseException">Thrown when obj is null</exception>
+        protected void CheckObjectForNull(object obj, string objName, int? objId)
+        {
+            if (obj == null)
+            {
+                string errorMessage = string.Empty;
+
+                if (objId.HasValue)
+                {
+                    errorMessage = string.Format("There is no {0} with id {1}", objName, objId.Value);
+                }
+                else
+                {
+                    errorMessage = string.Format("There is no such {0}", objName);
+                }
+
+                throw new HttpResponseException(new HttpResponseMessage()
+                {
+                    StatusCode = System.Net.HttpStatusCode.NotFound,
+                    Content = new StringContent(errorMessage)
+                });
+            }
         }
     }
 }

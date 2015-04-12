@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Linq.Expressions;
 
-    public interface IRepository<T> where T : class 
+    public interface IRepository<T> where T : class
     {
         IQueryable<T> All();
 
@@ -20,6 +20,8 @@
         T Update(T entity);
 
         void Delete(T entity);
+
+        void Delete(object id);
 
         void DeleteRange(IQueryable<T> entities);
 
