@@ -24,8 +24,6 @@
 
         public IDbSet<IndividualPromotion> IndividualPromotions { get; set; }
 
-        public IDbSet<Model> Models { get; set; }
-
         public IDbSet<Order> Orders { get; set; }
 
         public IDbSet<Product> Products { get; set; }
@@ -49,6 +47,23 @@
         public int SaveChanges()
         {
             return base.SaveChanges();
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Product>()
+                .HasRequired(m => m.Category)
+                .WithMany(t => t.Products)
+                .HasForeignKey(m => m.CategoryId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Product>()
+                .HasRequired(m => m.Trade)
+                .WithMany(t => t.Products)
+                .HasForeignKey(m => m.TradeId)
+                .WillCascadeOnDelete(false);
         }
     }
 }

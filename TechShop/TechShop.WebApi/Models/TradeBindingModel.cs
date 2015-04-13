@@ -16,8 +16,7 @@
                 {
                     Id = t.Id,
                     Name = t.Name,
-                    Position = t.Position,
-                    CategoryName = t.Category.Name
+                    Position = t.Position                    
                 };
             }
         }

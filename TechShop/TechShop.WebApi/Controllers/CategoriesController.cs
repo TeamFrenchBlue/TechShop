@@ -55,7 +55,6 @@
 
             var category = this.Data.Categories.All()
                 .Where(x => x.Id == id)
-                .Select(CategoryBindingModel.FromCategory)
                 .FirstOrDefault();
 
             this.CheckObjectForNull(category, "trade", id);
@@ -63,7 +62,17 @@
             category.Name = categoryModel.Name;
             category.Position = category.Position;
 
-            this.Data.SaveChanges();
+            this.Data.Categories.Update(category);
+
+            try
+            {
+                this.Data.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+                return this.GetExceptionMessage(ex);
+            }
 
             return Ok(string.Format("Category with id {0} is changed successfully", id));
         }
@@ -87,7 +96,16 @@
             category.Position = categoryModel.Position;
 
             this.Data.Categories.Add(category);
-            this.Data.SaveChanges();
+
+            try
+            {
+                this.Data.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+                return this.GetExceptionMessage(ex);
+            }
 
             return this.Ok(string.Format("Category name: {0} and id: {1} is created", category.Name, category.Id));
         }
@@ -103,7 +121,16 @@
             this.CheckObjectForNull(category, "trade", id);
 
             this.Data.Categories.Delete(category.Id);
-            this.Data.SaveChanges();
+
+            try
+            {
+                this.Data.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+                return this.GetExceptionMessage(ex);
+            }
 
             return this.Ok(category);
         }

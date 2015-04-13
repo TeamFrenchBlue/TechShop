@@ -6,6 +6,8 @@
 
     using Microsoft.AspNet.Identity;
     using System.Net.Http;
+    using System;
+    using System.Text;
 
     public class BaseController : ApiController
     {
@@ -73,6 +75,24 @@
                     Content = new StringContent(errorMessage)
                 });
             }
+        }
+
+        protected IHttpActionResult GetExceptionMessage(Exception ex)
+        {
+            var exceptionMessage = new StringBuilder();
+
+            while (ex.InnerException != null)
+            {
+                if (ex.Message.Contains("inner exception"))
+                {
+                    ex = ex.InnerException;
+                    continue;
+                }
+            }
+
+            exceptionMessage.Append(ex.Message);
+
+            return this.BadRequest(exceptionMessage.ToString());
         }
     }
 }

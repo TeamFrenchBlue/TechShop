@@ -8,14 +8,27 @@
     {
         public int Id { get; set; }
 
+        [Required]
+        [Index(IsUnique = true)]
+        [StringLength(50)]
+        public string Name { get; set; }
+
         public string ImageUrl { get; set; }
 
         public string Description { get; set; }
 
-        public virtual Model Model { get; set; }
+        public int CategoryId { get; set; }
+
+        public virtual Category Category { get; set; }
+
+        public int TradeId { get; set; }
+
+        public virtual Trade Trade { get; set; }
 
         [Required]
         [Column(TypeName = "money")]
         public decimal Price { get; set; }
+
+        public int Quantity { get; set; }
     }
 }

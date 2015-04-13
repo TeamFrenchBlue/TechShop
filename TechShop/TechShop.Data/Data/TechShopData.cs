@@ -53,12 +53,7 @@
         {
             get { return this.GetRepository<IndividualPromotion>(); }
             
-        }
-
-        public IRepository<Model> Models
-        {
-            get { return this.GetRepository<Model>(); }
-        }
+        }      
 
         public IRepository<Order> Orders
         {

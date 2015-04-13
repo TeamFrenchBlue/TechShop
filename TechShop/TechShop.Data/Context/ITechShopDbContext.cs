@@ -17,9 +17,7 @@
 
         IDbSet<GlobalPromotion> GlobalPromotions { get; }
 
-        IDbSet<IndividualPromotion> IndividualPromotions { get; }
-
-        IDbSet<Model> Models { get; }
+        IDbSet<IndividualPromotion> IndividualPromotions { get; }    
 
         IDbSet<Order> Orders { get; }
 

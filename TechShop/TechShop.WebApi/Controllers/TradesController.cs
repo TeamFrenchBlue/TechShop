@@ -6,6 +6,7 @@
     using System.Net;
     using System.Net.Http;
     using System.Web.Http;
+
     using TechShop.Data.Data;
     using TechShop.Models;
     using TechShop.WebApi.Models;
@@ -54,9 +55,13 @@
                 return this.BadRequest(ModelState);
             }
 
+            if (tradeModel == null)
+            {
+                return this.BadRequest("Invalid input parameters.");
+            }
+
             var trade = this.Data.Trades.All()
                 .Where(x => x.Id == id)
-                .Select(TradeBindingModel.FromTrade)
                 .FirstOrDefault();
 
             this.CheckObjectForNull(trade, "trade", id);
@@ -64,7 +69,18 @@
             trade.Name = tradeModel.Name;
             trade.Position = tradeModel.Position;
 
-            this.Data.SaveChanges();
+
+            this.Data.Trades.Update(trade);
+
+            try
+            {
+                this.Data.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+                return this.GetExceptionMessage(ex);
+            }
 
             return Ok(string.Format("Trade with id {0} is changed successfully", id));
         }
@@ -81,14 +97,20 @@
             {
                 return this.BadRequest("Invalid input parameters.");
             }
-
             var trade = new Trade();
-
             trade.Name = tradeModel.Name;
             trade.Position = tradeModel.Position;
 
-            this.Data.Trades.Add(trade);
-            this.Data.SaveChanges();
+            try
+            {
+                this.Data.Trades.Add(trade);
+                this.Data.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+                return this.GetExceptionMessage(ex);
+            }
 
             return this.Ok(string.Format("Trade name: {0} and id: {1} is created", trade.Name, trade.Id));
         }
@@ -104,7 +126,16 @@
             this.CheckObjectForNull(trade, "trade", id);
 
             this.Data.Trades.Delete(trade.Id);
-            this.Data.SaveChanges();
+
+            try
+            {
+                this.Data.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+                return this.GetExceptionMessage(ex);
+            }
 
             return this.Ok(trade);
         }

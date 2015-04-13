@@ -25,8 +25,7 @@
             if (!context.Products.Any())
             {
                 this.AddCategories(context);
-                this.AddTrades(context);
-                this.AddModels(context);
+                this.AddTrades(context);             
                 this.AddProducts(context); 
                 this.AddOrderStates(context);
             }
@@ -75,11 +74,13 @@
         {
             var lenovoLaptop = new Product
             {
-                Model = context.Models.First(m => m.Name == "Lenovo E450"),
+                Name = "Lenovo E450",
                 Price = 980.50m,
                 Description =
                     @"Explore the best 14"" business solution with next generation graphics,
-                        great storage, 5-button clickpad, and improved mobility"
+                        great storage, 5-button clickpad, and improved mobility",
+                TradeId = 1,
+                CategoryId = 1
             };
 
             context.Products.Add(lenovoLaptop);
@@ -106,35 +107,15 @@
         {
             var nokiaTrade = new Trade
             {
-                Name = "Nokia",
-                Category = context.Categories.First(c => c.Name == "Phones")
+                Name = "Nokia",               
             };
 
             var lenovoTrade = new Trade
             {
-                Name = "Lenovo",
-                Category = context.Categories.First(c => c.Name == "Laptops")
+                Name = "Lenovo"               
             };
 
             context.Trades.AddOrUpdate(nokiaTrade, lenovoTrade);
-            context.SaveChanges();
-        }
-
-        private void AddModels(TechShopDbContext context)
-        {
-            var lenovoModel = new Model
-            {
-                Name = "Lenovo E450",
-                Trade = context.Trades.First(t => t.Name == "Lenovo")
-            };
-
-            var nokiaModel = new Model
-            {
-                Name = "Nokia E6",
-                Trade = context.Trades.First(t => t.Name == "Nokia")
-            };
-
-            context.Models.AddOrUpdate(lenovoModel, nokiaModel);
             context.SaveChanges();
         }
 

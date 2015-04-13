@@ -16,9 +16,7 @@
 
         IRepository<GlobalPromotion> GlobalPromotions { get; }
 
-        IRepository<IndividualPromotion> IndividualPromotions { get; }
-
-        IRepository<Model> Models { get; }
+        IRepository<IndividualPromotion> IndividualPromotions { get; }      
 
         IRepository<Order> Orders { get; }
 
