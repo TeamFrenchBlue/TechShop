@@ -26,7 +26,8 @@
             var categories = this.Data.Categories.All()
                 .OrderBy(c => c.Position)
                 .ThenBy(c => c.Name)
-                .Select(CategoryBindingModel.FromCategory);
+                .Select(CategoryBindingModel.FromCategory)
+                .ToList();
 
             return this.Ok(categories);
         }

@@ -28,7 +28,8 @@
             var trade = this.Data.Trades.All()
                 .OrderBy(c => c.Position)
                 .ThenBy(c => c.Name)
-                .Select(TradeBindingModel.FromTrade);
+                .Select(TradeBindingModel.FromTrade)
+                .ToList();
 
             return this.Ok(trade);
         }
@@ -45,6 +46,17 @@
             this.CheckObjectForNull(trade, "trade", id);
 
             return this.Ok(trade);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IHttpActionResult GetByCategoryName([FromUri]string name)
+        {
+            var trades = this.Data.Trades.All()
+                .Where(c => c.Products.Any(p => p.Category.Name == name))
+                .Select(TradeBindingModel.FromTrade);
+
+            return this.Ok(trades);
         }
 
         [HttpPut]

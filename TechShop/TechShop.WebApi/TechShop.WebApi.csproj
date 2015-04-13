@@ -232,6 +232,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\TradesController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -240,6 +241,8 @@
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\Admin\AdminEditUserBindingModel.cs" />
     <Compile Include="Models\CategoryBindingModel.cs" />
+    <Compile Include="Models\ProductBindingModel.cs" />
+    <Compile Include="Models\ProductRequestBindingModel.cs" />
     <Compile Include="Models\TradeBindingModel.cs" />
     <Compile Include="Models\Users\AddProductToCartBindingModel.cs" />
     <Compile Include="Models\Users\LoginBindingModel.cs" />

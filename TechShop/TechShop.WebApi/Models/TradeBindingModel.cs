@@ -27,7 +27,5 @@
         public string Name { get; set; }
 
         public int Position { get; set; }
-
-        public string CategoryName { get; set; }
     }
 }

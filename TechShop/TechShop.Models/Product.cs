@@ -1,11 +1,19 @@
 ﻿namespace TechShop.Models
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
     public class Product
     {
+        private ICollection<IndividualPromotion> promotions;
+
+        public Product()
+        {
+            this.promotions = new HashSet<IndividualPromotion>();
+        }
+
         public int Id { get; set; }
 
         [Required]
@@ -30,5 +38,11 @@
         public decimal Price { get; set; }
 
         public int Quantity { get; set; }
+
+        public virtual ICollection<IndividualPromotion> Promotions
+        {
+            get { return this.promotions; }
+            set { this.promotions = value; }
+        }
     }
 }
