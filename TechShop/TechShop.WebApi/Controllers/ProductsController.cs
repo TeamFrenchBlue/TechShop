@@ -10,6 +10,7 @@
     using TechShop.Data.Data;
     using TechShop.Models;
     using TechShop.WebApi.Models;
+    using TechShop.WebApi.Providers;
 
     [RoutePrefix("api/products")]
     public class ProductsController : BaseController
@@ -90,11 +91,12 @@
 
             var productToRetutn = products
                 .Select(ProductBindingModel.FromProduct)
-                .ToList();
+                .AsEnumerable();
 
-            //TODO promotion price           
+            var promotionDecorator = new ItemPromotionProvider(productToRetutn, this.Data);
+            promotionDecorator.Decorate();
 
-            return Ok(productToRetutn);
+            return Ok(promotionDecorator.ResultSet);
         }
 
         [HttpPut]

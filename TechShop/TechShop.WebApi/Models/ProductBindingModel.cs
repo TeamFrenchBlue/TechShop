@@ -21,6 +21,7 @@
                     CategoryId = p.CategoryId,
                     TradeId = p.TradeId,
                     Price = p.Price,
+                    PromotionPrice = p.Price,
                     Quantity = p.Quantity,
                     TradeName = p.Trade.Name.ToLower(),
                     CategoryName = p.Category.Name.ToLower()
@@ -47,6 +48,8 @@
         public decimal Price { get; set; }
 
         public decimal PromotionPrice { get; set; }
+
+        public double Discount { get; set; }
 
         public int Quantity { get; set; }
     }
