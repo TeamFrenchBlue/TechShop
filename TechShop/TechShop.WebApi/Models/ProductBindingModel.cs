@@ -21,12 +21,14 @@
                     CategoryId = p.CategoryId,
                     TradeId = p.TradeId,
                     Price = p.Price,
-                    Quantity = p.Quantity
+                    Quantity = p.Quantity,
+                    TradeName = p.Trade.Name.ToLower(),
+                    CategoryName = p.Category.Name.ToLower()
                 };
             }
         }
 
-        public int Id { get; set; }       
+        public int Id { get; set; }
 
         public string Name { get; set; }
 
@@ -36,7 +38,11 @@
 
         public int CategoryId { get; set; }
 
+        public string CategoryName { get; set; }
+
         public int TradeId { get; set; }
+
+        public string TradeName { get; set; }
 
         public decimal Price { get; set; }
 

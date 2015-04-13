@@ -144,3 +144,6 @@
 /// <reference path="../controllers/CategoryController.js" />
 /// <reference path="../controllers/ItemController.js" />
 /// <reference path="../directives/Item.js" />
+/// <reference path="../services/publicRequests.js" />
+/// <reference path="../controllers/admin/AdminSettingsController.js" />
+/// <reference path="../controllers/user/UserSettingsController.js" />

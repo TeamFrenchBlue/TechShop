@@ -37,6 +37,16 @@
         controller: 'ItemController'
     })
 
+    .when('/user/settings', {
+        templateUrl: 'views/user/settings-view.html',
+        controller: 'UserSettingController'
+    })
+
+     .when('/admin/settings', {
+         templateUrl: 'views/admin/settings-view.html',
+         controller: 'AdminSettingController'
+     })
+
 
 }])
 
@@ -47,17 +57,26 @@
     notyService.success('Logout successfully.');
 })
 
-.run(function ($rootScope, $location, userSession) {
+.run(function ($rootScope, $location, userSession, publicRequests) {
     $rootScope.username = "";
     $rootScope.isLogin = false;
     $rootScope.isAdmin = "";
     $rootScope.category = "";
     $rootScope.subLocation = "";
 
+    publicRequests.getAllCategories()
+    .success(function (data) {
+        $rootScope.categories = data;
+        console.log(data);
+    })
+    .error(function (error) {
+        console.log(error);
+    })
+
     $rootScope.$on('$locationChangeStart', function (event) {
         if (userSession.getCurrentUser()) {
             $rootScope.username = userSession.getCurrentUser().userName;
-            $rootScope.isAdmin = userSession.getCurrentUser().isAdmin;
+            $rootScope.isAdmin = userSession.isAdmin();
             $rootScope.isLogin = true;
 
         } else {
@@ -65,6 +84,9 @@
             $rootScope.isAdmin = "";
             $rootScope.isLogin = false;
         }
+
+        console.log($rootScope.isAdmin);
+
 
         if ($location.path().indexOf("/user/") != -1 && !userSession.getCurrentUser()) {
             // Authorization check: anonymous site visitors cannot access user routes
@@ -76,5 +98,14 @@
             $location.path('/admin/home');
             console.log("admin");
         }
+
+        if ($location.path().indexOf("/settings") != -1 && $rootScope.isLogin) {
+            if ($rootScope.isAdmin) {
+                $location.path('/admin/settings');
+            } else {
+                $location.path('/user/settings');
+            }
+        }
+
     });
 })

@@ -27,25 +27,10 @@
 
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav">
-                                    <li>
-                                        <a href="#/category/phones">
-                                            Smartphones
+                                    <li ng-repeat="category in categories">
+                                        <a href="#/category/{{category.Name | lowercase}}">
+                                            {{category.Name}}
                                         </a>
-                                    </li>
-                                    <li>
-                                        <a href="#/category/tablets">Tablets</a>
-                                    </li>
-                                    <li>
-                                        <a href="#/category/laptops">Laptops</a>
-                                    </li>
-                                    <li>
-                                        <a href="#/category/pcs">PCs</a>
-                                    </li>
-                                    <li>
-                                        <a href="#/category/pcs">Cameras</a>
-                                    </li>
-                                    <li>
-                                        <a href="#/category/pcs">Go Pro</a>
                                     </li>
                                 </ul>
                                 <form class="navbar-form navbar-right" role="search" ng-switch="isLogin">
@@ -69,17 +54,12 @@
                                         </ul>
                                     </div>
                                     <!--options-->
-
-                                    <div class="btn-group" ng-switch-when="true">
-                                        <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">   
+                                    <div ng-switch-when="true" class="btn-group">
+                                        <a href="#/settings" class="btn btn-primary">
                                             <span class="glyphicon glyphicon-cog"></span>
                                         </a>
-                                        <ul class="dropdown-menu">
-                                            <li>
-                                                <a href="#">Some options</a>
-                                            </li>
-                                        </ul>
                                     </div>
+
                                     <div ng-switch-when="true" class="btn-group">
                                         <a href="#/logout" class="btn btn-default">Logout</a>
                                     </div>
@@ -104,25 +84,10 @@
                     <div class="col-md-4">
                         <h3>TechShop</h3>
                         <ul class="nav navbar-nav">
-                            <li>
-                                <a href="#/category/phones">
-                                    Smartphones
+                            <li ng-repeat="category in categories">
+                                <a href="#/category/{{category.Name | lowercase}}">
+                                    {{category.Name}}
                                 </a>
-                            </li>
-                            <li>
-                                <a href="#/category/tablets">Tablets</a>
-                            </li>
-                            <li>
-                                <a href="#/category/laptops">Laptops</a>
-                            </li>
-                            <li>
-                                <a href="#/category/pcs">PCs</a>
-                            </li>
-                            <li>
-                                <a href="#/category/pcs">Cameras</a>
-                            </li>
-                            <li>
-                                <a href="#/category/pcs">Go Pro</a>
                             </li>
                         </ul>
                     </div>
@@ -154,6 +119,7 @@
     <script src="services/requester.js"></script>
     <script src="services/userSession.js"></script>
     <script src="services/userRequests.js"></script>
+    <script src="services/publicRequests.js"></script>
 
     <script src="controllers/HomeController.js"></script>
     <script src="controllers/LoginController.js"></script>

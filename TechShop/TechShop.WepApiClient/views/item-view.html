@@ -1,5 +1,37 @@
-﻿<div class="jumbotron">
-    <h1>Item</h1>
-    {{category}}
-    {{currentItemId}}
+﻿<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-push-2">
+            <h1>{{item.Name}}</h1>
+            <div class="col-md-6">
+                <div>
+                    <a href="#/category/{{item.CategoryName}}/{{item.Id}}">
+                        <img class="img-rounded" ng-src="{{item.ImageUrl}}" width="150" height="150" hspace="10" vspace="10"
+                             ng-show="item.ImageUrl" />
+                        <img src="/images/noimage.jpg" class="img-rounded" width="150" height="150" hspace="10" vspace="10" alt=""
+                             ng-hide="item.ImageUrl" />
+                    </a>
+                </div>
+            </div>
+            <div class="product-meta col-md-6">
+                <div class="left">
+                    <p class="description">
+                        {{item.Description}}
+                    </p>
+                </div>
+                <div class="right">
+                    <div class="price">
+                        {{item.Price | currency:"USD$ "}}
+                    </div>
+                    <div class="cart">
+                        <button onclick="addToCart({{item.Id}}) class= btn btn-default">
+                            <span>Add to Cart</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <h1>TODO: Adds SOME MORE CONTENT</h1>
+    </div>
 </div>

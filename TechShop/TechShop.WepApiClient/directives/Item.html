@@ -1,42 +1,32 @@
 ﻿<div class="product-block">
     <div class="image ">
-        <!-- Swap image -->
-        <div class="flip">
-            <a href="http://www.themelexus.com/demo/opencart/bigshop/index.php?route=product/product&amp;path=59&amp;product_id=62" class="swap-image">
-                <img src="http://www.themelexus.com/demo/opencart/bigshop/image/cache/data/demo/printer-600x600.png" title="HP DeskJet 1010 Printer (CX015A)" alt="HP DeskJet 1010 Printer (CX015A)" class="front img-responsive">
+        <div>
+            <a href="#/category/{{datasource.CategoryName}}/{{datasource.Id}}">
+                <img class="img-rounded" ng-src="{{datasource.ImageUrl}}" width="150" height="150" hspace="10" vspace="10"
+                     ng-show="datasource.ImageUrl" />
+                <img src="/images/noimage.jpg" class="img-rounded" width="150" height="150" hspace="10" vspace="10" alt=""
+                     ng-hide="datasource.ImageUrl" />
             </a>
         </div>
     </div>
-
     <div class="product-meta">
         <div class="left">
             <h3 class="name">
-                <a href="http://www.themelexus.com/demo/opencart/bigshop/index.php?route=product/product&amp;path=59&amp;product_id=62">HP DeskJet 1010 Printer (CX015A)</a>
+                <a href="#/category/{{datasource.CategoryName}}/{{datasource.Id}}">{{datasource.Name}}</a>
             </h3>
             <p class="description">
-                Designed for everyday ease-this printer was designed ...
+                {{datasource.Description}}
             </p>
         </div>
         <div class="right">
-            <div class="rating">
-                <div>Some rating</div>
-            </div>
             <div class="price">
-                $30.00
+                {{datasource.Price | currency:"USD$ "}}
             </div>
             <div class="cart">
-                <!-- <input type="button" value="" onclick="addToCart('');" class="product-icon fa fa-shopping-cart shopping-cart" /> -->
-                <button onclick="addToCart('62');" class="btn btn-default transition-top-down icon-cart">
-                    <!-- <span class="fa fa-shopping-cart hidden-md hidden-lg">&nbsp;</span> -->
+                <button class=btn btn-default">
                     <span>Add to Cart</span>
                 </button>
             </div>
-        </div>
-        <div class="pav-colorbox-hold">
-            <a class="pav-colorbox cboxElement" href="http://www.themelexus.com/demo/opencart/bigshop/index.php?route=themecontrol/product&amp;product_id=62">
-                <!-- <em class="fa fa-plus"></em> -->
-                <span>Quick View</span>
-            </a>
         </div>
     </div>
 </div>

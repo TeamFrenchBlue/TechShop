@@ -35,6 +35,21 @@
 
             var products = this.Data.Products.All();
 
+            if (model.Id.HasValue)
+            {
+                products = products.Where(p => p.Id == model.Id.Value);
+            }
+
+            if (model.CategoryName != null)
+            {
+                products = products.Where(p => p.Category.Name == model.CategoryName);
+            }
+
+            if (model.TradeName != null)
+            {
+                products = products.Where(p => p.Trade.Name == model.TradeName);
+            }
+
             if (model.CategoryId.HasValue)
             {
                 products = products.Where(p => p.CategoryId == model.CategoryId.Value);

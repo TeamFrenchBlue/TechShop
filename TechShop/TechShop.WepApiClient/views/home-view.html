@@ -51,14 +51,11 @@
     <div class="row">
         <!--main-->
         <div>
-            <!-- item -->
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                <div item-for-sell>   </div>
+
+            <div class="col-md-2" ng-repeat="item in items">
+                <div item-for-sell datasource="item">   </div>
             </div>
-            <!-- item -->
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                <div item-for-sell>   </div>
-            </div>
+
         </div>
     </div>
 </div>

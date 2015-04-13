@@ -1,12 +1,17 @@
 ﻿<div class="container">
     <div class="row">
+        <div class="col-md-2">
+            <h1>{{category | uppercase}}</h1>
+            <ul class="nav nav-stacked nav-pills">
+                <li ng-repeat="trade in trades">
+                    <a href="#">{{trade.Name}}</a>
+                </li>
+            </ul>
+        </div>
         <div class="col-md-8">
-            <h1>Category</h1>
-            {{category}}
-            {{currentItemId}}
-            <div item-for-sell datasource="">              
+            <div class="col-md-4" ng-repeat="item in items">
+                <div item-for-sell datasource="item">   </div>
             </div>
-            {{customers}}
         </div>
     </div>
 </div>

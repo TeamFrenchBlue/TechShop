@@ -20,7 +20,8 @@
         register: function (registerData) {
             url = baseUrl + 'user/register';
             return requester.post(url, registerData);
-        }
+        },
+        
     };
 
 
