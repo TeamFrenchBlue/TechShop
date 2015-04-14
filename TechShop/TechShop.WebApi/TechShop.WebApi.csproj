@@ -254,6 +254,7 @@
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="UserSessionManager\IUserSessionManager.cs" />
+    <Compile Include="UserSessionManager\SessionAuthorizeAttribute.cs" />
     <Compile Include="UserSessionManager\UserSessionManager.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -109,7 +109,7 @@
                         jsSerializer.Deserialize<Dictionary<string, string>>(responseString);
                     var accessToken = responseData["access_token"];
                     var username = responseData["userName"];
-                    this.userSessionManager.CreateOrExtendUserSession(username, accessToken);
+                    this.userSessionManager.CreateUserSession(username, accessToken);
 
                     this.userSessionManager.RemoveExpiredSessions();
                 }
@@ -124,7 +124,7 @@
         }
 
         [HttpPost]
-        [Authorize]
+        [SessionAuthorize]
         [Route("cart/add")]
         public IHttpActionResult AddProductToCart(AddProductToCartBindingModel cartItemData)
         {
@@ -160,7 +160,7 @@
         }
 
         [HttpDelete]
-        [Authorize]
+        [SessionAuthorize]
         [Route("cart/remove/{id}")]
         public IHttpActionResult RemoveFromCart(int id)
         {

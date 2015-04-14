@@ -6,7 +6,9 @@
     {
         ITechShopData Data { get; }
 
-        void CreateOrExtendUserSession(string username, string accessToken);
+        void CreateUserSession(string username, string accessToken);
+
+        bool ValidateUserSession();
 
         void RemoveUserSession();
 

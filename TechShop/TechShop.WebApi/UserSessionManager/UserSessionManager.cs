@@ -4,9 +4,12 @@
     using System.Linq;
     using System.Net.Http;
     using System.Web;
+
     using Data.Data;
-    using Microsoft.AspNet.Identity;
     using TechShop.Models;
+
+    using Microsoft.AspNet.Identity;
+
 
     public class UserSessionManager
         : IUserSessionManager
@@ -26,26 +29,41 @@
 
         public ITechShopData Data { get; private set; }
 
-        public void CreateOrExtendUserSession(string username, string accessToken)
+        public void CreateUserSession(string username, string accessToken)
         {
             var user = this.Data.Users.All().First(u => u.UserName == username);
-            UserSession userSession = this.Data.UserSessions
-                .All()
-                .FirstOrDefault(s => s.UserId == user.Id);
-            if (userSession == null)
+            UserSession userSession = new UserSession
             {
-                userSession = new UserSession
-                {
-                    UserId = user.Id,
-                    AccessToken = accessToken
-                };
-
-                this.Data.UserSessions.Add(userSession);
-            }
+                UserId = user.Id,
+                AccessToken = accessToken
+            };
             
             userSession.ExpirationDate = DateTime.Now + Common.Constants.DefaultUserSessionTimeout;
-            userSession.AccessToken = accessToken;
+            this.Data.UserSessions.Add(userSession);
             this.Data.SaveChanges();
+        }
+
+        public bool ValidateUserSession()
+        {
+            string authToken = this.GetAccessToken();
+            var currentUserId = this.GetCurrentUserId();
+            var userSession = this.Data.UserSessions.All().FirstOrDefault(session =>
+                session.AccessToken == authToken && session.UserId == currentUserId);
+
+            if (userSession == null)
+            {
+                return false;
+            }
+
+            if (userSession.ExpirationDate < DateTime.Now)
+            {
+                return false;
+            }
+
+            userSession.ExpirationDate = DateTime.Now + Common.Constants.DefaultUserSessionTimeout;
+            this.Data.SaveChanges();
+
+            return true;
         }
 
         public void RemoveUserSession()

@@ -2,14 +2,18 @@
 {
     using System.Linq;
     using System.Web.Http;
+
     using Data.Context;
     using Data.Data;
-    using Microsoft.AspNet.Identity;
-    using Microsoft.AspNet.Identity.EntityFramework;
     using Models.Admin;
     using TechShop.Models;
+    using UserSessionManager;
 
-    [Authorize(Roles = "Administrator")]
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+
+
+    [SessionAuthorize(Roles = "Administrator")]
     [RoutePrefix("api/admin")]
     public class AdminController : BaseController
     {
