@@ -14,6 +14,7 @@
 
     using Data.Context;
     using Data.Data;
+    using Microsoft.AspNet.Identity;
     using Models.Users;
     using TechShop.Models;
     using UserSessionManager;
@@ -168,6 +169,35 @@
             if (cartItem == null)
             {
                 return this.NotFound();
+            }
+
+            string currentUserId = HttpContext.Current.User.Identity.GetUserId();
+            if (cartItem.User.Id != currentUserId)
+            {
+                return this.BadRequest("This product does not belong to your cart.");
+            }
+
+            this.Data.Carts.Delete(cartItem);
+            this.Data.SaveChanges();
+
+            return this.Ok("Cart item removed successfully");
+        }
+
+        [HttpDelete]
+        [SessionAuthorize]
+        [Route("cart/products/remove/{productId}")]
+        public IHttpActionResult RemoveFromCartByProductId(int productId)
+        {
+            var cartItem = this.Data.Carts.All().FirstOrDefault(c => c.Product.Id == productId);
+            if (cartItem == null)
+            {
+                return this.NotFound();
+            }
+
+            string currentUserId = HttpContext.Current.User.Identity.GetUserId();
+            if (cartItem.User.Id != currentUserId)
+            {
+                return this.BadRequest("This product does not belong to your cart.");
             }
 
             this.Data.Carts.Delete(cartItem);
