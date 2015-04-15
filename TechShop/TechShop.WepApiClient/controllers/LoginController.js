@@ -6,8 +6,8 @@
         $location.path('/');
     }
 
-    $scope.username = 'asdasd';
-    $scope.password = 'asdasd';
+    $scope.username = 'admin';
+    $scope.password = 'admin123';
 
     $scope.login = function login() {
         userRequests.login($scope.username, $scope.password)

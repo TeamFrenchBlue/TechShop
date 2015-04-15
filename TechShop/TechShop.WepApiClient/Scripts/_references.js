@@ -147,3 +147,4 @@
 /// <reference path="../services/publicRequests.js" />
 /// <reference path="../controllers/admin/AdminSettingsController.js" />
 /// <reference path="../controllers/user/UserSettingsController.js" />
+/// <reference path="../services/adminRequests.js" />

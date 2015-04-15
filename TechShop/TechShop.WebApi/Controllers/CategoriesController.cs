@@ -58,10 +58,10 @@
                 .Where(x => x.Id == id)
                 .FirstOrDefault();
 
-            this.CheckObjectForNull(category, "trade", id);
+            this.CheckObjectForNull(category, "category", id);
 
             category.Name = categoryModel.Name;
-            category.Position = category.Position;
+            category.Position = categoryModel.Position;
 
             this.Data.Categories.Update(category);
 
@@ -119,7 +119,7 @@
                 .Select(CategoryBindingModel.FromCategory)
                 .FirstOrDefault();
 
-            this.CheckObjectForNull(category, "trade", id);
+            this.CheckObjectForNull(category, "category", id);
 
             this.Data.Categories.Delete(category.Id);
 

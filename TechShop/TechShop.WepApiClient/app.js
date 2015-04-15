@@ -42,10 +42,17 @@
         controller: 'UserSettingController'
     })
 
-     .when('/admin/settings', {
+    .when('/admin/settings', {
+        templateUrl: 'views/admin/settings-view.html',
+        controller: 'AdminSettingsController'
+    })
+
+     .when('/admin/settings/:settingsName', {
          templateUrl: 'views/admin/settings-view.html',
-         controller: 'AdminSettingController'
+         controller: 'AdminSettingsController'
      })
+
+
 
 
 }])
@@ -64,14 +71,20 @@
     $rootScope.category = "";
     $rootScope.subLocation = "";
 
-    publicRequests.getAllCategories()
-    .success(function (data) {
-        $rootScope.categories = data;
-        console.log(data);
-    })
-    .error(function (error) {
-        console.log(error);
-    })
+    $rootScope.getCategories = function () {
+        publicRequests.getAllCategories()
+        .success(function (data) {
+            $rootScope.categories = data;
+            console.log(data);
+        })
+        .error(function (error) {
+            console.log(error);
+        })
+    }
+
+    $rootScope.getCategories();
+
+
 
     $rootScope.$on('$locationChangeStart', function (event) {
         if (userSession.getCurrentUser()) {
@@ -97,14 +110,6 @@
         if (userSession.isAdmin() && $location.path().indexOf("/user/") != -1) {
             $location.path('/admin/home');
             console.log("admin");
-        }
-
-        if ($location.path().indexOf("/settings") != -1 && $rootScope.isLogin) {
-            if ($rootScope.isAdmin) {
-                $location.path('/admin/settings');
-            } else {
-                $location.path('/user/settings');
-            }
         }
 
     });

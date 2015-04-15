@@ -27,20 +27,20 @@
         public ItemPromotionProvider(IEnumerable<ProductBindingModel> resultSet, ITechShopData data)
             : base(resultSet, data)
         {
-            foreach (var product in resultSet)
-            {
-                var localProduct = new ProductBindingModel();
-                localProduct.Id = product.Id;
-                localProduct.ImageUrl = product.ImageUrl;
-                localProduct.TradeId = product.TradeId;
-                localProduct.Price = product.Price;
-                localProduct.Description = product.Description;
-                localProduct.Discount = 0.00;
-                localProduct.PromotionPrice = product.Price;
-                localProduct.CategoryId = product.CategoryId;
+            //foreach (var product in resultSet)
+            //{
+            //    var localProduct = new ProductBindingModel();
+            //    localProduct.Id = product.Id;
+            //    localProduct.ImageUrl = product.ImageUrl;
+            //    localProduct.TradeId = product.TradeId;
+            //    localProduct.Price = product.Price;
+            //    localProduct.Description = product.Description;
+            //    localProduct.Discount = 0.00;
+            //    localProduct.PromotionPrice = product.Price;
+            //    localProduct.CategoryId = product.CategoryId;
 
-                this.ResultSet.Add(localProduct);
-            }
+            //    this.ResultSet.Add(localProduct);
+            //}
         }
 
         public override void Decorate()

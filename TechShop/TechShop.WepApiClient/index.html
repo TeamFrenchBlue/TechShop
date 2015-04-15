@@ -55,9 +55,14 @@
                                     </div>
                                     <!--options-->
                                     <div ng-switch-when="true" class="btn-group">
-                                        <a href="#/settings" class="btn btn-primary">
-                                            <span class="glyphicon glyphicon-cog"></span>
-                                        </a>
+                                        <div ng-switch="isAdmin">
+                                            <a href="#/admin/settings/categories" ng-switch-when="true" class="btn btn-primary">
+                                                <span class="glyphicon glyphicon-cog"></span>
+                                            </a>
+                                            <a href="#/user/settings" ng-switch-when="false" class="btn btn-primary">
+                                                <span class="glyphicon glyphicon-cog"></span>
+                                            </a>
+                                        </div>
                                     </div>
 
                                     <div ng-switch-when="true" class="btn-group">
@@ -120,12 +125,15 @@
     <script src="services/userSession.js"></script>
     <script src="services/userRequests.js"></script>
     <script src="services/publicRequests.js"></script>
+    <script src="services/adminRequests.js"></script>
 
     <script src="controllers/HomeController.js"></script>
     <script src="controllers/LoginController.js"></script>
     <script src="controllers/RegisterController.js"></script>
     <script src="controllers/CategoryController.js"></script>
     <script src="controllers/ItemController.js"></script>
+
+    <script src="controllers/admin/AdminSettingsController.js"></script>
 
     <script src="directives/Item.js"></script>
 

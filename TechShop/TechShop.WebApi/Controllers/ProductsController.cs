@@ -13,6 +13,7 @@
     using TechShop.WebApi.Providers;
 
     [RoutePrefix("api/products")]
+    [Authorize(Roles = "Administrator")]
     public class ProductsController : BaseController
     {
         public ProductsController(ITechShopData data)
