@@ -47,6 +47,11 @@
         controller: 'AdminSettingsController'
     })
 
+    .when('/admin/settings/products', {
+        templateUrl: 'views/admin/settings-product-view.html',
+        controller: 'AdminSettingsProductController'
+    })
+
      .when('/admin/settings/:settingsName', {
          templateUrl: 'views/admin/settings-view.html',
          controller: 'AdminSettingsController'

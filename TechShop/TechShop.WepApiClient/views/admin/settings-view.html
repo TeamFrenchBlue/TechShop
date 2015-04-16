@@ -18,38 +18,35 @@
         </div>
         <div class="col-lg-8">
             <h2>{{settings | uppercase}}</h2>
-            <div ng-switch="settings">
-                <table class="table table-bordered table-hover table-striped table-responsive" ng-switch-default>
-                    <thead>
-                        <tr>
-                            <th ng-repeat="(key,val) in datas[0]">
-                                {{key}}
-                            </th>
-                            <th>
-                                Actions
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="data in datas">
-                            <td ng-repeat="(key,val) in data">
-                                {{val}}
-                            </td>
-                            <td>
-                                <div class="btn btn-default btn-sm"
-                                     ng-click="showModalEdit(data.Id)">Edit</div>
-                                <div class="btn btn-danger btn-sm"
-                                     ng-click="showModalDelete(data.Id)">Delete</div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="btn btn-primary"
-                     ng-click="showModalAdd()">Add item</div>
-                <div ng-switch-when="products">
-                    asd
-                </div>
-            </div>
+
+            <table class="table table-bordered table-hover table-striped table-responsive">
+                <thead>
+                    <tr>
+                        <th ng-repeat="(key,val) in datas[0]">
+                            {{key}}
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="data in datas">
+                        <td ng-repeat="(key,val) in data">
+                            {{val}}
+                        </td>
+                        <td>
+                            <div class="btn btn-default btn-sm"
+                                 ng-click="showModalEdit(data.Id)">Edit</div>
+                            <div class="btn btn-danger btn-sm"
+                                 ng-click="showModalDelete(data.Id)">Delete</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="btn btn-primary"
+                 ng-click="showModalAdd()">Add item</div>
+
         </div>
     </div>
 </div>
@@ -99,7 +96,6 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
 <!--MODALS-->
 <div class="modal fade" id="addModal">
     <div class="modal-dialog">

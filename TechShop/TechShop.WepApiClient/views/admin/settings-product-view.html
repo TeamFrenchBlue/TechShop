@@ -1,0 +1,206 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <h2>Settings</h2>
+            <div class="panel">
+                <ul class="nav nav-stacked nav-pills">
+                    <li ng-class="settings == 'categories' ? 'active' : ''">
+                        <a href="#/admin/settings/categories">Categories</a>
+                    </li>
+                    <li ng-class="settings == 'trades' ? 'active' : ''">
+                        <a href="#/admin/settings/trades">Trades</a>
+                    </li>
+                    <li ng-class="settings == 'products' ? 'active' : ''">
+                        <a href="#/admin/settings/products">Products</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <h2>{{settings | uppercase}}</h2>
+
+            <table class="table table-bordered table-hover table-striped table-responsive">
+                <thead>
+                    <tr>
+                        <th>
+                            Id
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Image
+                        </th>
+                        <th>
+                            Description
+                        </th>
+                        <th>
+                            Price
+                        </th>
+                        <th>
+                            Promotion Price
+                        </th>
+                        <th>
+                            Quantity
+                        </th>
+                        <th>
+                            Trade
+                        </th>
+                        <th>
+                            Category
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="data in datas">
+                        <td>
+                            {{data.Id}}
+                        </td>
+                        <td>
+                            {{data.Name}}
+                        </td>
+                        <td>
+                            <img class="img-rounded" ng-src="{{data.ImageUrl}}" width="150" height="150" hspace="10" vspace="10"
+                                 ng-show="data.ImageUrl" />
+                            <img src="/images/noimage.jpg" class="img-rounded" width="150" height="150" hspace="10" vspace="10" alt=""
+                                 ng-hide="data.ImageUrl" />
+                        </td>
+                        <td>
+                            {{data.Description}}
+                        </td>
+                        <td>
+                            {{data.Price}}
+                        </td>
+                        <td>
+                            {{data.PromotionPrice}}
+                        </td>
+                        <td>
+                            {{data.Quantity}}
+                        </td>
+                        <td>
+                            {{data.TradeName}}
+                        </td>
+                        <td>
+                            {{data.CategoryName}}
+                        </td>
+                        <td>
+                            <div class="btn btn-default btn-sm"
+                                 ng-click="showModalEdit(data.Id)">Edit</div>
+                            <div class="btn btn-danger btn-sm"
+                                 ng-click="showModalDelete(data.Id)">Delete</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="btn btn-primary"
+                 ng-click="showModalAdd()">Add item</div>
+        </div>
+    </div>
+</div>
+
+
+<!--MODALS-->
+<div class="modal fade" id="editModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">{{settings | uppercase}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="control-label" for="name">Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Name" ng-model="currentObj.Name">
+                </div>
+                <div class="form-group">
+                    <img class="img-rounded" ng-src="{{currentObj.ImageUrl}}" width="150" height="150" hspace="10" vspace="10"
+                         ng-show="currentObj.ImageUrl" />
+                    <img src="/images/noimage.jpg" class="img-rounded" width="150" height="150" hspace="10" vspace="10" alt=""
+                         ng-hide="currentObj.ImageUrl" />                   
+                    <!--<input id="uploadFile" placeholder="File path" class="form-control" disabled="disabled" ng-model="currentObj.ImageUrl" />-->
+                    <input id="uploadBtn" type="file" class="upload" onchange="angular.element(this).scope().fileSelected(this)" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="Description">Description</label>
+                    <textarea type="text" class="form-control" id="Description" placeholder="Description" ng-model="currentObj.Description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="Price">Price</label>
+                    <input type="text" class="form-control" id="Price" placeholder="Price" ng-model="currentObj.Price">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="PromotionPrice">Promotion Price</label>
+                    <input type="text" class="form-control" id="PromotionPrice" placeholder="PromotionPrice" ng-model="currentObj.PromotionPrice">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="Quantity">Quantity</label>
+                    <input type="text" class="form-control" id="Quantity" placeholder="Quantity" ng-model="currentObj.Quantity">
+                </div>
+                <div class="form-group">
+                    <label for="town" class="control-label">Category</label>
+                    <select class="form-control" ng-model="adData.townId" ng-options="town.id as town.name for town in towns">
+                        <option value="">(None)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="town" class="control-label">Trade</label>
+                    <select class="form-control" ng-model="adData.townId" ng-options="town.id as town.name for town in towns">
+                        <option value="">(None)</option>
+                    </select>
+                </div>
+                {{currentObj}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="edit()">Save changes</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="deleteModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Are you sure?</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" ng-repeat="(key,val) in currentObj">
+                    <label class="control-label" for="{{data}}">{{key}}</label>
+                    <input type="text" class="form-control" id="{{data}}" disabled ng-model="currentObj[key]">
+                </div>
+                {{currentObj}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" ng-click="delete()">Delete</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!--MODALS-->
+<div class="modal fade" id="addModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Add new item</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" ng-repeat="(key,val) in currentObj">
+                    <label class="control-label" for="{{data}}">{{key}}</label>
+                    <input type="text" class="form-control" id="{{data}}" placeholder="{{key}}" ng-model="currentObj[key]">
+                </div>
+                {{currentObj}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="add()">Add</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

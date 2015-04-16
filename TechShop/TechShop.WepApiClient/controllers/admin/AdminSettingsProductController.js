@@ -1,41 +1,18 @@
 ﻿angular.module('app')
 
-.controller('AdminSettingsController', function ($scope, $rootScope, $route, publicRequests, adminRequests, notyService) {
-    $scope.settings = $route.current.params['settingsName'];
+.controller('AdminSettingsProductController', function ($scope, $rootScope, $route, publicRequests, adminRequests, notyService) {
+    $scope.settings = 'products';
     $scope.datas = [];
     $scope.currentObj = {};
 
     function getData() {
-        switch ($scope.settings) {
-            case 'categories':
-                publicRequests.getAllCategories()
-                .success(function (data) {
-                    $scope.datas = data;
-                }).
-                error(function (error) {
-                    console.log(error);
-                });
-                break;
-            case 'trades':
-                publicRequests.getAllTrades()
-                .success(function (data) {
-                    $scope.datas = data;
-                }).
-                error(function (error) {
-                    console.log(error);
-                });
-                break;
-            case 'products':
-                publicRequests.getAllProducts()
-               .success(function (data) {
-                   $scope.datas = data;
-               }).
-               error(function (error) {
-                   console.log(error);
-               });
-                break;
-            default:
-        }
+        publicRequests.getAllProducts()
+       .success(function (data) {
+           $scope.datas = data;
+       }).
+       error(function (error) {
+           console.log(error);
+       });
     }
 
     $scope.showModalEdit = function (id) {
@@ -71,7 +48,7 @@
         }
 
         $('#editModal').modal('hide');
-        $location.path('/settings/' + $scope.settings);
+        $route.reload();
 
     };
 
@@ -93,7 +70,7 @@
         }
 
         $('#deleteModal').modal('hide');
-        $location.path('/settings/' + $scope.settings);
+        $route.reload();
 
     };
 
@@ -115,6 +92,7 @@
         }
 
         $('#addModal').modal('hide');
+        $route.reload();
 
     };
 
@@ -128,45 +106,32 @@
     };
 
     function getCurrentObjEmpty() {
-
-        switch ($scope.settings) {
-            case 'categories':
-                $scope.currentObj = {
-                    Id: 0,
-                    Name: "",
-                    Position: ""
-                }
-                break;
-            case 'trades':
-                $scope.currentObj = {
-                    Id: 0,
-                    Name: "",
-                    Position: ""
-                }
-                break;
-            case 'products':
-                $scope.currentObj = {
-                    Id: 0,
-                    Name: "",
-                    Position: ""
-                }
-                break;
-            default:
+        $scope.currentObj = {
+            Id: 0,
+            Name: "",
+            Position: ""
         }
     }
 
-    $('#addModal').on('hidden.bs.modal', function (e) {
-        console.log(e);
-        $route.reload();
-    });
+    $scope.fileSelected = function (fileInputField) {
+        $scope.currentObj.fileName = fileInputField.value;
+        delete $scope.currentObj.ImageUrl;
+        var file = fileInputField.files[0];
+        if (file.type.match(/image\/.*/)) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                $scope.currentObj.ImageUrl = reader.result;
+                $scope.$apply();
+            };
+            reader.readAsDataURL(file);
+        } else {
+            delete $scope.currentObj.ImageUrl;
+            $scope.$apply();
+            notyService.error("File your are trying to upload isn't a picture!");
+        }
+    }
 
-    $('#deleteModal').on('hidden.bs.modal', function (e) {
-        $route.reload();
-    });
 
-    $('#editModal').on('hidden.bs.modal', function (e) {
-        $route.reload();
-    });
 
     getData();
 });
