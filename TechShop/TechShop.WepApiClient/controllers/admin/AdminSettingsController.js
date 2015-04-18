@@ -1,6 +1,6 @@
 ﻿angular.module('app')
 
-.controller('AdminSettingsController', function ($scope, $rootScope, $route, publicRequests, adminRequests, notyService) {
+.controller('AdminSettingsController', function ($scope, $rootScope, $location, $route, publicRequests, adminRequests, notyService) {
     $scope.settings = $route.current.params['settingsName'];
     $scope.datas = [];
     $scope.currentObj = {};
@@ -71,8 +71,6 @@
         }
 
         $('#editModal').modal('hide');
-        $location.path('/settings/' + $scope.settings);
-
     };
 
     $scope.delete = function () {
@@ -81,19 +79,23 @@
         .success(function (data) {
             console.log(data);
             notyService.success(data);
+
+            if ($scope.settings == "categories") {
+                $rootScope.getCategories();
+            }
+
+            var index = $scope.datas.indexOf($scope.currentObj);
+            $scope.datas = $scope.datas.filter(function (value, index) {
+                return value !== $scope.currentObj;
+            })
         })
         .error(function (error) {
             var errorMessage = error.Message == null ? error : error.Message
             notyService.error(errorMessage);
             console.log(error);
-        })
-
-        if ($scope.settings == "categories") {
-            $rootScope.getCategories();
-        }
+        });
 
         $('#deleteModal').modal('hide');
-        $location.path('/settings/' + $scope.settings);
 
     };
 
@@ -102,17 +104,19 @@
         adminRequests.add($scope.settings, $scope.currentObj)
         .success(function (data) {
             console.log(data);
+
             notyService.success(data);
+            if ($scope.settings == "categories") {
+                $rootScope.getCategories();
+            }
+
+            $scope.datas.push($scope.currentObj);
         })
         .error(function (error) {
             var errorMessage = error.Message == null ? error : error.Message
             notyService.error(errorMessage);
             console.log(error);
-        })
-
-        if ($scope.settings == "categories") {
-            $rootScope.getCategories();
-        }
+        });
 
         $('#addModal').modal('hide');
 
@@ -154,19 +158,6 @@
             default:
         }
     }
-
-    $('#addModal').on('hidden.bs.modal', function (e) {
-        console.log(e);
-        $route.reload();
-    });
-
-    $('#deleteModal').on('hidden.bs.modal', function (e) {
-        $route.reload();
-    });
-
-    $('#editModal').on('hidden.bs.modal', function (e) {
-        $route.reload();
-    });
 
     getData();
 });
